@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fachri Rizki Fadillah - Portfolio</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#050505',      // Very dark background
+                            card: '#111111',    // Dark grey for cards
+                            cyan: '#00f3ff',    // Neon cyan accent
+                            blue: '#0055ff',    // Deep blue accent
+                            gray: '#8892b0',    // Muted text
+                            light: '#ccd6f6'    // Primary text
+                        }
+                    },
+                    animation: {
+                        'glow-pulse': 'glow-pulse 3s infinite alternate',
+                    },
+                    keyframes: {
+                        'glow-pulse': {
+                            '0%': { boxShadow: '0 0 10px #00f3ff20, 0 0 20px #00f3ff20' },
+                            '100%': { boxShadow: '0 0 15px #00f3ff50, 0 0 30px #00f3ff40' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050505;
+            color: #ccd6f6;
+        }
+        
+        /* Cyberpunk Glow Effects */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.6);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .card-hover:hover {
+            border-color: #00f3ff;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .cyber-button {
+            position: relative;
+            background: transparent;
+            color: #00f3ff;
+            border: 1px solid #00f3ff;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 243, 255, 0.1);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+        .cyber-button:hover::before {
+            transform: scaleX(1);
+        }
+        .cyber-button:hover {
+            box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+            color: #fff;
+            text-shadow: 0 0 5px #00f3ff;
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00f3ff, #0055ff);
+            opacity: 0.3;
+        }
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 20px;
+            }
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 11px;
+            top: 24px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #00f3ff;
+            box-shadow: 0 0 10px #00f3ff;
+        }
+        @media (min-width: 768px) {
+            .timeline-dot {
+                left: 16px;
+            }
+        }
+
+        /* Nav Link */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #00f3ff;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Utility */
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 243, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-cyan/30 selection:text-white">
+
+    <!-- Ambient Background Glow -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-brand-blue/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+    <div class="fixed bottom-0 right-1/4 w-96 h-96 bg-brand-cyan/10 rounded-full blur-[150px] pointer-events-none -z-10"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold tracking-tighter text-white">
+                        <span class="text-brand-cyan"><i class="fas fa-terminal mr-2"></i></span>FRF
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#profil" class="nav-link text-brand-light hover:text-brand-cyan px-1 py-2 text-sm font-medium transition-colors">Profil</a>
+                        <a href="#pengalaman" class="nav-link text-brand-light hover:text-brand-cyan px-1 py-2 text-sm font-medium transition-colors">Pengalaman</a>
+                        <a href="#proyek" class="nav-link text-brand-light hover:text-brand-cyan px-1 py-2 text-sm font-medium transition-colors">Proyek</a>
+                        <a href="#keterampilan" class="nav-link text-brand-light hover:text-brand-cyan px-1 py-2 text-sm font-medium transition-colors">Keterampilan</a>
+                        <a href="#pendidikan" class="nav-link text-brand-light hover:text-brand-cyan px-1 py-2 text-sm font-medium transition-colors">Pendidikan</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-brand-light hover:text-brand-cyan focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-bg/95 backdrop-blur-md border-b border-gray-800">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#profil" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-cyan hover:bg-gray-900 rounded-md">Profil</a>
+                <a href="#pengalaman" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-cyan hover:bg-gray-900 rounded-md">Pengalaman</a>
+                <a href="#proyek" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-cyan hover:bg-gray-900 rounded-md">Proyek</a>
+                <a href="#keterampilan" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-cyan hover:bg-gray-900 rounded-md">Keterampilan</a>
+                <a href="#pendidikan" class="block px-3 py-2 text-base font-medium text-brand-light hover:text-brand-cyan hover:bg-gray-900 rounded-md">Pendidikan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center pt-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto w-full">
+                <p class="text-brand-cyan font-mono text-sm md:text-base mb-4 tracking-wide">
+                    > Halo, nama saya
+                </p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-tight">
+                    Fachri Rizki Fadillah.
+                </h1>
+                <h2 class="text-3xl md:text-5xl lg:text-6xl font-bold text-brand-gray mb-8">
+                    Administrasi Logistik | IT Support <br class="hidden md:block"> 
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-brand-blue">| Full-Stack Web Developer</span>
+                </h2>
+                
+                <!-- Contact Info Chips -->
+                <div class="flex flex-wrap gap-4 mt-8 mb-12">
+                    <a href="tel:+6287814108782" class="flex items-center gap-2 bg-brand-card border border-gray-800 px-4 py-2 rounded-full text-sm hover:border-brand-cyan/50 hover:text-brand-cyan transition-colors">
+                        <i class="fas fa-phone-alt text-brand-cyan"></i> +6287814108782
+                    </a>
+                    <a href="mailto:fachririzki1709@gmail.com" class="flex items-center gap-2 bg-brand-card border border-gray-800 px-4 py-2 rounded-full text-sm hover:border-brand-cyan/50 hover:text-brand-cyan transition-colors">
+                        <i class="fas fa-envelope text-brand-cyan"></i> fachririzki1709@gmail.com
+                    </a>
+                    <div class="flex items-center gap-2 bg-brand-card border border-gray-800 px-4 py-2 rounded-full text-sm">
+                        <i class="fas fa-map-marker-alt text-brand-cyan"></i> Cianjur, West Java, Indonesia
+                    </div>
+                    <a href="https://linkedin.com/in/fachri-rizki-fadillah" target="_blank" class="flex items-center gap-2 bg-brand-card border border-gray-800 px-4 py-2 rounded-full text-sm hover:border-brand-cyan/50 hover:text-brand-cyan transition-colors">
+                        <i class="fab fa-linkedin text-brand-cyan"></i> LinkedIn
+                    </a>
+                </div>
+
+                <div class="flex gap-4">
+                    <a href="#proyek" class="cyber-button px-8 py-3 rounded text-sm font-semibold tracking-wide uppercase">
+                        Lihat Proyek
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profil Section -->
+        <section id="profil" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-8">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center">
+                        <span class="text-brand-cyan font-mono text-xl mr-3">01.</span> Profil
+                    </h2>
+                    <div class="h-px bg-gray-800 flex-grow ml-6"></div>
+                </div>
+                
+                <div class="bg-brand-card p-8 rounded-lg border border-gray-800 card-hover leading-relaxed text-brand-gray text-lg">
+                    <p>
+                        Lulusan Teknik Komputer dan Jaringan (TKJ) dengan pengalaman lebih dari 5 tahun di bidang administrasi logistik, operasional gudang, quality control, dan IT Support. Berpengalaman mengelola administrasi transportasi, perencanaan rute armada, pengendalian proses inbound-outbound, serta monitoring operasional menggunakan SAP ERP, TMS, dan Microsoft Excel.
+                    </p>
+                    <p class="mt-4">
+                        Memiliki kemampuan analisis yang baik, teliti dalam pengolahan data, cepat beradaptasi, serta terbiasa bekerja sama lintas divisi untuk memastikan operasional berjalan efektif dan efisien. Siap memberikan kontribusi terbaik serta terbuka terhadap berbagai peluang karier di bidang administrasi, logistik, manufaktur, operasional, maupun teknologi informasi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pengalaman Kerja Section -->
+        <section id="pengalaman" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center">
+                        <span class="text-brand-cyan font-mono text-xl mr-3">02.</span> Pengalaman Kerja
+                    </h2>
+                    <div class="h-px bg-gray-800 flex-grow ml-6"></div>
+                </div>
+
+                <div class="relative pl-4 md:pl-8">
+                    <div class="timeline-line"></div>
+
+                    <!-- Experience 1 -->
+                    <div class="relative pl-8 md:pl-12 mb-12 group">
+                        <div class="timeline-dot group-hover:scale-125 transition-transform duration-300"></div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white text-glow">Koordinator Inbound & Outbound</h3>
+                            <span class="text-brand-cyan font-mono text-sm mt-1 md:mt-0">Apr 2025 - Apr 2026</span>
+                        </div>
+                        <h4 class="text-lg text-brand-gray mb-4 font-medium">PT Sindang Asih Makmur</h4>
+                        <ul class="space-y-3 text-brand-gray/80 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Mengatur proses penerimaan (inbound) bahan baku beras dari supplier, termasuk mengecek kualitas awal (seperti kadar air dan kadar patah) sebelum beras dimasukkan ke gudang.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Memastikan kelancaran alur stok bahan baku dari gudang ke area mesin penggilingan, supaya proses produksi harian tidak pernah telat atau kehabisan bahan.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Mengawasi tata letak penyimpanan beras di gudang dan memastikan kebersihan area supaya stok bahan baku maupun produk jadi aman dari hama.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Memimpin proses pengeluaran barang jadi (outbound) dan mengawasi proses muat (loading) ke truk, memastikan jumlah dan kualitas karung pas dengan dokumen Surat Jalan.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Merekap data harian untuk jumlah barang yang masuk dan keluar, serta rutin mengecek kondisi timbangan digital agar pencatatan stok selalu akurat.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience 2 -->
+                    <div class="relative pl-8 md:pl-12 mb-12 group">
+                        <div class="timeline-dot bg-brand-blue shadow-[0_0_10px_#0055ff] group-hover:scale-125 transition-transform duration-300"></div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Admin Transport & Planner Penjaluran</h3>
+                            <span class="text-brand-cyan font-mono text-sm mt-1 md:mt-0">Nov 2021 - Feb 2025</span>
+                        </div>
+                        <h4 class="text-lg text-brand-gray mb-4 font-medium">PT Cianjur Alam Utama (Wings Group)</h4>
+                        <ul class="space-y-3 text-brand-gray/80 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Merencanakan rute harian untuk 50+ truk. Pembagian rute yang pas berhasil memangkas waktu di jalan hingga 15% dan mencapai 95% pengiriman tepat waktu.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Melacak posisi armada secara real-time melalui sistem SAP dan TMS agar pergerakan truk di lapangan selalu terpantau.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Menyiapkan kelengkapan dokumen jalan sopir, mulai dari cetak Surat Jalan, verifikasi Delivery Order (DO), hingga pengarsipan.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Merekap pemakaian BBM dan menghitung biaya operasional bulanan menggunakan Excel agar pengeluaran armada selalu terkontrol.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Mengoordinasikan jadwal dengan sopir, tim gudang, dan teknisi untuk memastikan proses muat barang lancar dan armada siap jalan.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience 3 -->
+                    <div class="relative pl-8 md:pl-12 mb-12 group">
+                        <div class="timeline-dot bg-gray-600 shadow-none group-hover:scale-125 transition-transform duration-300"></div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Design Graphic</h3>
+                            <span class="text-brand-cyan font-mono text-sm mt-1 md:mt-0">Dec 2020 - Oct 2021</span>
+                        </div>
+                        <h4 class="text-lg text-brand-gray mb-4 font-medium">Yayasan Kaisar Padjajaran</h4>
+                        <ul class="space-y-3 text-brand-gray/80 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Membuat desain poster, banner, dan mengurus konten sosial media untuk keperluan promosi yayasan.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Membantu dokumentasi foto dan edit video untuk berbagai kegiatan.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Experience 4 -->
+                    <div class="relative pl-8 md:pl-12 group">
+                        <div class="timeline-dot bg-gray-600 shadow-none group-hover:scale-125 transition-transform duration-300"></div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                            <h3 class="text-xl font-bold text-white">Teknisi Handphone</h3>
+                            <span class="text-brand-cyan font-mono text-sm mt-1 md:mt-0">Aug 2019 - Nov 2020</span>
+                        </div>
+                        <h4 class="text-lg text-brand-gray mb-4 font-medium">PT Unicom Care (Divisi Xiaomi)</h4>
+                        <ul class="space-y-3 text-brand-gray/80 text-sm">
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Mengecek dan memperbaiki HP pelanggan yang rusak, baik perbaikan komponen fisik (hardware) maupun sistem (software).</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-caret-right text-brand-cyan mt-1 mr-3"></i>
+                                <span>Melakukan cek ulang (quality control) sebelum perangkat dikembalikan ke pelanggan dan mencatat keluar-masuk stok spare part.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Proyek Section -->
+        <section id="proyek" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center">
+                        <span class="text-brand-cyan font-mono text-xl mr-3">03.</span> Proyek Utama
+                    </h2>
+                    <div class="h-px bg-gray-800 flex-grow ml-6"></div>
+                </div>
+
+                <div class="bg-brand-card rounded-xl border border-brand-cyan/30 overflow-hidden card-hover animate-glow-pulse relative">
+                    <!-- Overlay tech pattern -->
+                    <div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(#00f3ff_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+                    
+                    <div class="p-8 md:p-10 relative z-10">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-6 gap-4">
+                            <div>
+                                <p class="text-brand-cyan font-mono text-sm mb-2"><i class="fas fa-code-branch mr-2"></i>Featured Project</p>
+                                <h3 class="text-2xl md:text-3xl font-bold text-white text-glow">Proyek Layanan SF Tech</h3>
+                                <p class="text-brand-gray mt-1 text-sm md:text-base">Full-Stack Web Developer <span class="mx-2">|</span> Jul 2026 - Agu 2026</p>
+                            </div>
+                            <!-- Live Demo Button -->
+                            <a href="https://techf-koz5.onrender.com/" target="_blank" class="cyber-button px-6 py-2 rounded text-sm font-semibold inline-flex items-center whitespace-nowrap shadow-lg">
+                                <i class="fas fa-external-link-alt mr-2"></i> Live Demo Sistem
+                            </a>
+                        </div>
+                        
+                        <div class="bg-[#0a0a0a] p-6 rounded-lg border border-gray-800 mb-6">
+                            <ul class="space-y-4 text-brand-gray/90 text-sm md:text-base">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-brand-cyan mt-1 mr-3"></i>
+                                    <span>Membangun platform layanan perbaikan teknis dari nol menggunakan JavaScript, Node.js, Express, dan database MongoDB.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-brand-cyan mt-1 mr-3"></i>
+                                    <span>Membuat fitur pelacakan/teknisi secara langsung (real-time tracking) menggunakan Leaflet.js dan fitur komunikasi menggunakan Socket.io.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 font-mono text-xs">
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">JavaScript</span>
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">Node.js</span>
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">Express</span>
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">MongoDB</span>
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">Socket.io</span>
+                            <span class="px-3 py-1 bg-brand-cyan/10 text-brand-cyan border border-brand-cyan/20 rounded-full">Leaflet.js</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Keterampilan & Keahlian Section -->
+        <section id="keterampilan" class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center">
+                        <span class="text-brand-cyan font-mono text-xl mr-3">04.</span> Keterampilan & Keahlian
+                    </h2>
+                    <div class="h-px bg-gray-800 flex-grow ml-6"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Kategori 1 -->
+                    <div class="bg-brand-card p-6 rounded-lg border border-gray-800 card-hover">
+                        <div class="text-brand-cyan mb-4"><i class="fas fa-desktop text-2xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-4">Aplikasi & Office</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Ms. Word</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Excel</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">PowerPoint</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Access</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Publisher</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Visio</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Google Workspace</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Adobe Creative Suite</span>
+                        </div>
+                    </div>
+
+                    <!-- Kategori 2 -->
+                    <div class="bg-brand-card p-6 rounded-lg border border-gray-800 card-hover">
+                        <div class="text-brand-cyan mb-4"><i class="fas fa-truck-loading text-2xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-4">Logistik & Gudang</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">SAP ERP</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">TMS</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Inbound/Outbound</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Penjaluran Rute</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Quality Control (QC)</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Pengarsipan Surat Jalan</span>
+                        </div>
+                    </div>
+
+                    <!-- Kategori 3 -->
+                    <div class="bg-brand-card p-6 rounded-lg border border-gray-800 card-hover">
+                        <div class="text-brand-cyan mb-4"><i class="fas fa-network-wired text-2xl"></i></div>
+                        <h3 class="text-lg font-bold text-white mb-4">IT, Jaringan & Web</h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Hardware/Software TS</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">Mikrotik & Cisco</span>
+                            <span class="text-xs px-3 py-1 bg-gray-800/50 text-brand-light rounded border border-gray-700">VMWare</span>
+                            <span class="text-xs px-3 py-1 bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 rounded">JS</span>
+                            <span class="text-xs px-3 py-1 bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 rounded">Node.js</span>
+                            <span class="text-xs px-3 py-1 bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 rounded">MongoDB</span>
+                            <span class="text-xs px-3 py-1 bg-brand-cyan/20 text-brand-cyan border border-brand-cyan/30 rounded">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pendidikan & Sertifikasi Section -->
+        <section id="pendidikan" class="py-20 px-4 sm:px-6 lg:px-8 mb-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold text-white flex items-center">
+                        <span class="text-brand-cyan font-mono text-xl mr-3">05.</span> Pendidikan & Sertifikasi
+                    </h2>
+                    <div class="h-px bg-gray-800 flex-grow ml-6"></div>
+                </div>
+
+                <div class="bg-brand-card p-8 rounded-lg border border-gray-800 flex flex-col md:flex-row md:items-start gap-8 card-hover">
+                    <div class="w-16 h-16 bg-brand-bg rounded-lg border border-brand-cyan/30 flex items-center justify-center flex-shrink-0 shadow-[0_0_15px_rgba(0,243,255,0.2)]">
+                        <i class="fas fa-graduation-cap text-2xl text-brand-cyan"></i>
+                    </div>
+                    <div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-2">
+                            <h3 class="text-xl font-bold text-white">SMKN 1 CIANJUR</h3>
+                            <span class="text-brand-cyan font-mono text-sm mt-1 md:mt-0">Jul 2016 - Mei 2019</span>
+                        </div>
+                        <h4 class="text-lg text-brand-gray mb-4">Teknik Komputer Jaringan (TKJ)</h4>
+                        
+                        <div class="mt-6">
+                            <h5 class="text-sm font-bold text-white uppercase tracking-wider mb-3">Sertifikasi & Pelatihan:</h5>
+                            <ul class="space-y-2 text-sm text-brand-gray/90">
+                                <li><i class="fas fa-certificate text-brand-cyan mr-2"></i> Microsoft Office (LKP IFAN JAYA, 2025)</li>
+                                <li><i class="fas fa-certificate text-brand-cyan mr-2"></i> Keahlian TKJ (BNSP, 2019)</li>
+                                <li><i class="fas fa-certificate text-brand-cyan mr-2"></i> PKL (PT Dirgantara Indonesia, 2018)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-card border-t border-gray-800 py-8 text-center">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col items-center">
+            <p class="text-brand-gray text-sm font-mono">
+                &copy; 2026 Fachri Rizki Fadillah.<br>
+                <span class="mt-2 block">Designed with <i class="fas fa-bolt text-brand-cyan mx-1"></i> SF Tech Cyber Theme</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('glass-nav');
+            } else {
+                navbar.classList.remove('glass-nav');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        const mobileLinks = menu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
