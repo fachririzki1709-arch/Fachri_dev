@@ -166,7 +166,7 @@
             <div class="tech-card rounded-3xl overflow-hidden p-1 lg:p-2" data-aos="fade-up" data-aos-delay="100">
                 <div class="grid grid-cols-1 lg:grid-cols-2 rounded-[1.3rem] overflow-hidden bg-brand-950">
                     
-                    <!-- App Mockup Visual -->
+                   <!-- App Mockup Visual -->
                     <div class="relative bg-gradient-to-br from-brand-900 to-brand-950 p-6 sm:p-10 flex items-center justify-center min-h-[400px] lg:border-r border-brand-800 overflow-hidden group">
                         <!-- Abstract Maps/Grid Background inside mockup -->
                         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
@@ -180,17 +180,18 @@
                                 <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
                                 <div class="ml-4 h-4 w-32 bg-brand-950 rounded-md"></div>
                             </div>
-                            <img src="desktop_mode.jpg" alt="SF Tech Desktop" class="w-full object-cover">
+                            <!-- KODE PERBAIKAN: Penambahan aspect-video dan object-top -->
+                            <img src="desktop_mode.jpg" alt="SF Tech Desktop" class="w-full aspect-video object-cover object-top">
                         </div>
 
                         <!-- Mobile Mockup Overlap -->
-                        <div class="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 w-[28%] max-w-[140px] bg-brand-950 rounded-[2rem] border-[6px] border-brand-900 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden z-20 transition-transform duration-700 group-hover:-translate-y-6">
+                        <div class="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 w-[30%] max-w-[140px] bg-brand-950 rounded-[2rem] border-[6px] border-brand-900 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden z-20 transition-transform duration-700 group-hover:-translate-y-6">
                             <!-- Notch -->
                             <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-4 bg-brand-900 rounded-b-xl"></div>
-                            <img src="1000307701_2.jpg" alt="SF Tech Mobile" class="w-full object-cover">
+                            <!-- KODE PERBAIKAN: Penambahan aspect-[9/19] untuk mengunci bentuk Frame HP -->
+                            <img src="1000307701_2.jpg" alt="SF Tech Mobile" class="w-full aspect-[9/19] object-cover object-left-top">
                         </div>
-                    </div>
-                    
+                    </div>                    
                     <!-- Content Details -->
                     <div class="p-8 sm:p-12 flex flex-col justify-center">
                         <div class="flex flex-wrap items-center gap-3 mb-6">
