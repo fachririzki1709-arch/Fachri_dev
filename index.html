@@ -161,13 +161,13 @@
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
-            <!-- Sisi Kiri: Visual Mockup Gambar (Desktop + Mobile) -->
+            <!-- Sisi Kiri: Visual Mockup Gambar (Desktop + Mobile) yang Anti-Kempes -->
             <div class="relative w-full h-[400px] sm:h-[500px] flex items-center justify-center bg-gradient-to-br from-brand-900 to-brand-950 rounded-3xl border border-brand-800 overflow-hidden group" data-aos="fade-right">
                 <!-- Abstract Background Pattern -->
                 <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
                 
-                <!-- Desktop Mockup (Menggunakan Gambar) -->
-                <div class="absolute w-[85%] sm:w-[80%] max-w-2xl bg-brand-950 rounded-xl border border-brand-800 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-2">
+                <!-- Desktop Mockup -->
+                <div class="relative w-[85%] sm:w-[80%] max-w-2xl bg-brand-950 rounded-xl border border-brand-800 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden transition-transform duration-700 group-hover:scale-105 group-hover:-translate-y-2 z-10">
                     <!-- Mac Controls -->
                     <div class="h-6 sm:h-8 bg-brand-900 border-b border-brand-800 flex items-center px-3 sm:px-4 gap-1.5 sm:gap-2">
                         <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80"></div>
@@ -178,16 +178,20 @@
                             techf-koz5.onrender.com
                         </div>
                     </div>
-                    <!-- Gambar Desktop Asli -->
-                    <img src="desktop_mode_2.jpg" alt="SF Tech Desktop Preview" class="w-full h-auto object-cover">
+                    <!-- Frame Gambar Desktop (Menggunakan aspect-ratio agar tidak menyusut) -->
+                    <div class="aspect-[16/9] w-full bg-brand-950">
+                        <img src="desktop_mode.jpg" alt="SF Tech Desktop Preview" class="w-full h-full object-cover">
+                    </div>
                 </div>
 
-                <!-- Mobile Mockup Overlap (Menggunakan Gambar) -->
+                <!-- Mobile Mockup Overlap -->
                 <div class="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 w-[30%] max-w-[120px] sm:max-w-[150px] bg-brand-950 rounded-[1.5rem] sm:rounded-[2rem] border-[4px] sm:border-[6px] border-brand-900 shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden z-20 transition-transform duration-700 group-hover:-translate-y-6">
                     <!-- Notch Handphone -->
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-3 sm:h-4 bg-brand-900 rounded-b-xl z-30"></div>
-                    <!-- Gambar Mobile Asli -->
-                    <img src="1000307701_3.jpg" alt="SF Tech Mobile Preview" class="w-full h-full object-cover">
+                    <!-- Frame Gambar Mobile -->
+                    <div class="aspect-[9/19] w-full bg-brand-950">
+                        <img src="1000307701.jpg" alt="SF Tech Mobile Preview" class="w-full h-full object-cover object-top">
+                    </div>
                 </div>
             </div>
 
